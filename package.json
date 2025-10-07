@@ -1,0 +1,24 @@
+{
+    "name": "woocommerce-blocks-addon",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "wp-scripts start",
+        "build": "wp-scripts build",
+        "lint": "wp-scripts lint-js"
+    },
+    "devDependencies": {
+        "@wordpress/block-editor": "^15.5.0",
+        "@wordpress/blocks": "^15.5.0",
+        "@wordpress/components": "^27.0.0",
+        "@wordpress/data": "^9.0.0",
+        "@wordpress/i18n": "^5.5.0",
+        "@wordpress/scripts": "^30.0.0",
+        "ajv": "^8.17.1",
+        "ajv-keywords": "^5.1.0"
+    },
+    "dependencies": {
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    }
+}

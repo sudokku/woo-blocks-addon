@@ -1,0 +1,76 @@
+.wp-block-wcba-advanced-product-card,
+.wcba-product-card {
+	position: relative;
+}
+
+.wcba-card__media {
+	position: relative;
+	overflow: hidden;
+}
+
+.wcba-card__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.wcba-card__overlay {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.wcba-card__overlay.is-gradient {
+	background: linear-gradient(180deg, rgba(0,0,0,.0) 0%, rgba(0,0,0,.45) 100%);
+}
+
+.wcba-card__overlay.is-solid {
+	background: rgba(0,0,0,.25);
+}
+
+.wcba-card__badges {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	display: flex;
+	gap: 6px;
+}
+
+.wcba-badge {
+	background: #111;
+	color: #fff;
+	font-size: 12px;
+	line-height: 1;
+	padding: 4px 6px;
+	border-radius: 3px;
+}
+
+.wcba-badge--sale { background: #cc1818; }
+.wcba-badge--discount { background: #0a7f2e; }
+
+.wcba-card__content {
+	padding: 12px 0;
+}
+
+.wcba-card__title {
+	margin: 8px 0 6px;
+	font-size: 1rem;
+}
+
+.wcba-card__price {
+	display: flex;
+	gap: 8px;
+	align-items: baseline;
+}
+
+.wcba-price--regular { opacity: .6; }
+.wcba-price--sale { color: #0a7f2e; }
+
+.wcba-card__actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+
+

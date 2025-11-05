@@ -51,5 +51,20 @@ class Plugin_Loader {
 		// Example: register a shared frontend stylesheet if needed later.
 		// Keeping placeholder to wire up once build assets exist.
 	}
+
+	public static function activate(): void
+	{
+		// Minimal environment validation on activation.
+		if (!class_exists('\\WooCommerce')) {
+			// Deactivate self and explain requirement.
+			deactivate_plugins(plugin_basename(WCBA_PATH . 'woocommerce-blocks-addon.php'));
+			wp_die(esc_html__('WooCommerce Blocks Addon requires WooCommerce to be active.', WCBA_TEXTDOMAIN));
+		}
+	}
+
+	public static function deactivate(): void
+	{
+		// Placeholder for future cleanup.
+	}
 }
 

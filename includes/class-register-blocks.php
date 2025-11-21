@@ -25,7 +25,27 @@ class Register_Blocks {
 							if ($name && \WP_Block_Type_Registry::get_instance()->is_registered($name)) {
 								continue;
 							}
-							register_block_type($maybe_dir);
+							$args = [];
+							if (is_array($meta) && !empty($meta['render'])) {
+								$render_meta = $meta['render'];
+								$callback = null;
+								if (is_string($render_meta)) {
+									if (strpos($render_meta, 'file:') === 0) {
+										$relative = trim(substr($render_meta, 5));
+										$relative = ltrim($relative, './');
+										$render_file = trailingslashit($maybe_dir) . $relative;
+										if (file_exists($render_file)) {
+											$callback = include $render_file;
+										}
+									} else {
+										$callback = $render_meta;
+									}
+								}
+								if (is_string($callback) || is_callable($callback)) {
+									$args['render_callback'] = $callback;
+								}
+							}
+							register_block_type($maybe_dir, $args);
 						}
 					}
 				}
@@ -37,7 +57,27 @@ class Register_Blocks {
 				$meta = wp_json_file_decode($root_block_json, ['associative' => true]);
 				$name = is_array($meta) && !empty($meta['name']) ? $meta['name'] : null;
 				if (!$name || !\WP_Block_Type_Registry::get_instance()->is_registered($name)) {
-					register_block_type(WCBA_BUILD_PATH);
+					$args = [];
+					if (is_array($meta) && !empty($meta['render'])) {
+						$render_meta = $meta['render'];
+						$callback = null;
+						if (is_string($render_meta)) {
+							if (strpos($render_meta, 'file:') === 0) {
+								$relative = trim(substr($render_meta, 5));
+								$relative = ltrim($relative, './');
+								$render_file = trailingslashit(WCBA_BUILD_PATH) . $relative;
+								if (file_exists($render_file)) {
+									$callback = include $render_file;
+								}
+							} else {
+								$callback = $render_meta;
+							}
+						}
+						if (is_string($callback) || is_callable($callback)) {
+							$args['render_callback'] = $callback;
+						}
+					}
+					register_block_type(WCBA_BUILD_PATH, $args);
 				}
 			}
 		}
@@ -59,7 +99,27 @@ class Register_Blocks {
 						if ($name && \WP_Block_Type_Registry::get_instance()->is_registered($name)) {
 							continue;
 						}
-						register_block_type($maybe_dir);
+						$args = [];
+						if (is_array($meta) && !empty($meta['render'])) {
+							$render_meta = $meta['render'];
+							$callback = null;
+							if (is_string($render_meta)) {
+								if (strpos($render_meta, 'file:') === 0) {
+									$relative = trim(substr($render_meta, 5));
+									$relative = ltrim($relative, './');
+									$render_file = trailingslashit($maybe_dir) . $relative;
+									if (file_exists($render_file)) {
+										$callback = include $render_file;
+									}
+								} else {
+									$callback = $render_meta;
+								}
+							}
+							if (is_string($callback) || is_callable($callback)) {
+								$args['render_callback'] = $callback;
+							}
+						}
+						register_block_type($maybe_dir, $args);
 					}
 				}
 			}

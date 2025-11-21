@@ -1,0 +1,195 @@
+{
+  "apiVersion": 3,
+  "name": "wcba/product-grid-advanced",
+  "title": "Product Grid Advanced",
+  "category": "woocommerce",
+  "description": "A highly customizable WooCommerce block that displays products in a flexible grid layout with integrated filtering, sorting, and display controls.",
+  "keywords": ["product", "woocommerce", "grid", "filter", "category", "shop"],
+  "textdomain": "wcba",
+  "attributes": {
+    "querySource": {
+      "type": "string",
+      "default": "all"
+    },
+    "productIds": {
+      "type": "array",
+      "default": []
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "tags": {
+      "type": "array",
+      "default": []
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "onSale": {
+      "type": "boolean",
+      "default": false
+    },
+    "inStock": {
+      "type": "boolean",
+      "default": false
+    },
+    "priceMin": {
+      "type": "number",
+      "default": 0
+    },
+    "priceMax": {
+      "type": "number",
+      "default": 0
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "order": {
+      "type": "string",
+      "default": "DESC"
+    },
+    "perPage": {
+      "type": "number",
+      "default": 12
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "columnsTablet": {
+      "type": "number",
+      "default": 3
+    },
+    "columnsMobile": {
+      "type": "number",
+      "default": 2
+    },
+    "gap": {
+      "type": "number",
+      "default": 20
+    },
+    "enableFilters": {
+      "type": "boolean",
+      "default": false
+    },
+    "filterCategories": {
+      "type": "boolean",
+      "default": true
+    },
+    "filterPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "filterRating": {
+      "type": "boolean",
+      "default": false
+    },
+    "filterStock": {
+      "type": "boolean",
+      "default": false
+    },
+    "enableSorting": {
+      "type": "boolean",
+      "default": true
+    },
+    "paginationMode": {
+      "type": "string",
+      "default": "numbers"
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showRating": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": false
+    },
+    "showSaleBadge": {
+      "type": "boolean",
+      "default": true
+    },
+    "showNewBadge": {
+      "type": "boolean",
+      "default": false
+    },
+    "showAddToCart": {
+      "type": "boolean",
+      "default": true
+    },
+    "useAjaxCart": {
+      "type": "boolean",
+      "default": true
+    },
+    "imageAspectRatio": {
+      "type": "string",
+      "default": "1:1"
+    },
+    "imageHoverEffect": {
+      "type": "string",
+      "default": "none"
+    },
+    "cardPadding": {
+      "type": "number",
+      "default": 0
+    },
+    "cardBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "cardShadow": {
+      "type": "boolean",
+      "default": false
+    },
+    "cardHoverShadow": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "render": "file:./render.php",
+  "supports": {
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "gradients": true,
+      "link": true
+    },
+    "border": {
+      "radius": true,
+      "color": true,
+      "style": true,
+      "width": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true
+    }
+  },
+  "style": "file:./style.css",
+  "editorStyle": "file:./editor.css",
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js"
+}
+

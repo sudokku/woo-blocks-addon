@@ -32,6 +32,13 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const blockProps = useBlockProps( { className: 'wcba-product-card' } );
 
+	wp.element.useEffect(() => {
+		// eslint-disable-next-line no-console
+		console.log('[WCBA] attributes', attributes);
+		// eslint-disable-next-line no-console
+		console.log('[WCBA] search', search, 'isLoading', isLoading, 'products(ids)', (products || []).map(p => p?.id));
+	}, [attributes, products, isLoading, search]);
+
 	return (
 		<>
 			<InspectorControls>
@@ -51,7 +58,11 @@ export default function Edit( { attributes, setAttributes } ) {
 								{ label: __( '— Select —', 'wcba' ), value: '' },
 								...products.map( ( p ) => ( { label: p.title?.rendered || `#${ p.id }`, value: p.id } ) ),
 							] }
-							onChange={ ( val ) => setAttributes( { productId: val ? parseInt( val, 10 ) : undefined } ) }
+								onChange={(val) => {
+									// eslint-disable-next-line no-console
+									console.log('[WCBA] onSelect product', val, 'parsed', val ? parseInt(val, 10) : undefined);
+									setAttributes({ productId: val ? parseInt(val, 10) : undefined });
+								}}
 						/>
 					) }
 
@@ -128,6 +139,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						checked={ !!showQuickView }
 						onChange={ ( val ) => setAttributes( { showQuickView: !!val } ) }
 					/>
+				</PanelBody>
+				<PanelBody title={__('Debug', 'wcba')} initialOpen={false}>
+					<p><strong>{__('Product ID', 'wcba')}:</strong> {String(productId ?? '')}</p>
+					<p><strong>{__('Search', 'wcba')}:</strong> {search}</p>
+					<p><strong>{__('Loading', 'wcba')}:</strong> {String(!!isLoading)}</p>
+					<p><strong>{__('Product IDs', 'wcba')}:</strong> {(products || []).map(p => p?.id).join(', ')}</p>
+					<pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{JSON.stringify(attributes, null, 2)}</pre>
 				</PanelBody>
 			</InspectorControls>
 

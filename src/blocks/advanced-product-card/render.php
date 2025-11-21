@@ -4,6 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 	function wcba_render_advanced_product_card( $attributes, $content, $block ) {
+		if (!function_exists('wc_get_product')) {
+			return '<div class="wcba-product-card wcba-product-card--error">' . esc_html__('WooCommerce is not active.', 'wcba') . '</div>';
+		}
 		$product_id     = isset( $attributes['productId'] ) ? absint( $attributes['productId'] ) : 0;
 		$use_ajax_cart  = ! empty( $attributes['useAjaxCart'] );
 		$overlay        = ! empty( $attributes['overlayEnabled'] );
@@ -21,7 +24,7 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		
 		$product = wc_get_product( $product_id );
 		if ( ! $product ) {
-			return '';
+			return '<div class="wcba-product-card wcba-product-card--missing">' . sprintf(esc_html__('Product not found (ID: %d).', 'wcba'), $product_id) . '</div>';
 		}
 		
 		$link      = get_permalink( $product_id );

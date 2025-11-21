@@ -2,6 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 function wcba_render_advanced_product_card( $attributes, $content, $block ) {
 	$product_id     = isset( $attributes['productId'] ) ? absint( $attributes['productId'] ) : 0;
 	$use_ajax_cart  = ! empty( $attributes['useAjaxCart'] );
@@ -100,6 +101,7 @@ function wcba_render_advanced_product_card( $attributes, $content, $block ) {
 	</div>
 	<?php
 	return ob_get_clean();
+}
 }
 
 return 'wcba_render_advanced_product_card';

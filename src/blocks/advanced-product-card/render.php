@@ -9,8 +9,7 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		}
 		$product_id     = isset( $attributes['productId'] ) ? absint( $attributes['productId'] ) : 0;
 		$use_ajax_cart  = ! empty( $attributes['useAjaxCart'] );
-		$overlay        = ! empty( $attributes['overlayEnabled'] );
-		$overlay_style  = isset( $attributes['overlayStyle'] ) ? sanitize_key( $attributes['overlayStyle'] ) : 'none';
+		$overlay = !empty($attributes['overlayEnabled']);
 		$show_price     = isset( $attributes['showPrice'] ) ? (bool) $attributes['showPrice'] : true;
 		$show_sku = isset($attributes['showSku']) ? (bool) $attributes['showSku'] : false;
 		$show_sale      = ! empty( $attributes['showSaleBadge'] );
@@ -91,8 +90,8 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		}
 		
 		$overlay_html = '';
-		if ( $overlay && in_array( $overlay_style, [ 'gradient', 'solid' ], true ) ) {
-			$overlay_html = '<div class="wcba-card__overlay is-' . esc_attr( $overlay_style ) . '"></div>';
+		if ($overlay) {
+			$overlay_html = '<div class="wcba-card__overlay is-solid"></div>';
 		}
 		
 		ob_start();

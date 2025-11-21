@@ -9,8 +9,10 @@
   "attributes": {
     "productId": { "type": "number" },
     "useAjaxCart": { "type": "boolean", "default": true },
-    "overlayEnabled": { "type": "boolean", "default": false },
-    "overlayStyle": { "type": "string", "default": "none" },
+    "overlayEnabled": {
+      "type": "boolean",
+      "default": false
+    },
     "imageSwapEnabled": { "type": "boolean", "default": false },
     "showPrice": { "type": "boolean", "default": true },
     "showSaleBadge": { "type": "boolean", "default": false },
@@ -54,8 +56,8 @@
       "__experimentalFontWeight": true
     }
   },
-  "style": "file:./style.css",
-  "editorStyle": "file:./editor.css",
+  "style": "file:./style-index.css",
+  "editorStyle": "file:./index.css",
   "editorScript": "file:./index.js"
 }
 

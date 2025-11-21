@@ -7,7 +7,6 @@ import ServerSideRender from '@wordpress/server-side-render';
 export default function Edit( { attributes, setAttributes } ) {
 	const {
 		overlayEnabled,
-		overlayStyle,
 		imageSwapEnabled,
 		showPrice,
 		showSku,
@@ -79,18 +78,6 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( val ) => setAttributes( { overlayEnabled: !!val } ) }
 						/>
 					</PanelRow>
-					{ overlayEnabled && (
-						<SelectControl
-							label={ __( 'Overlay Style', 'wcba' ) }
-							value={ overlayStyle }
-							options={ [
-								{ label: __( 'None', 'wcba' ), value: 'none' },
-								{ label: __( 'Gradient', 'wcba' ), value: 'gradient' },
-								{ label: __( 'Solid', 'wcba' ), value: 'solid' },
-							] }
-							onChange={ ( val ) => setAttributes( { overlayStyle: val } ) }
-						/>
-					) }
 
 					<ToggleControl
 						label={ __( 'Image Swap on Hover', 'wcba' ) }
@@ -146,6 +133,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( val ) => setAttributes( { showQuickView: !!val } ) }
 					/>
 				</PanelBody>
+				{/* Overlay color removed for now */}
 				<PanelBody title={__('Debug', 'wcba')} initialOpen={false}>
 					<p><strong>{__('Product ID', 'wcba')}:</strong> {String(productId ?? '')}</p>
 					<p><strong>{__('Search', 'wcba')}:</strong> {search}</p>

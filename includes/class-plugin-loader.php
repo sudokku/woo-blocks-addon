@@ -35,11 +35,16 @@ class Plugin_Loader {
 		// In a small plugin we can manually require classes.
 		require_once WCBA_PATH . 'includes/class-register-blocks.php';
 		require_once WCBA_PATH . 'includes/class-extend-core-blocks.php';
+		require_once WCBA_PATH . 'includes/class-ajax-handler.php';
 	}
 
 	private function init_hooks(): void {
 		add_action( 'init', [ $this, 'register_blocks' ] );
 		add_action( 'init', [ $this, 'register_assets' ] );
+		
+		// Initialize AJAX handler
+		$ajax_handler = new Ajax_Handler();
+		$ajax_handler->init();
 	}
 
 	public function register_blocks(): void {

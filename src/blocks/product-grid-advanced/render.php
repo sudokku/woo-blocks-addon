@@ -53,9 +53,25 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 		'post_status'    => 'publish',
 		'posts_per_page' => $per_page,
 		'paged'          => $paged,
-		'orderby'        => $order_by,
-		'order'          => $order,
 	];
+
+	// Handle WooCommerce specific ordering
+	if ( 'popularity' === $order_by ) {
+		$args['meta_key'] = 'total_sales';
+		$args['orderby']  = 'meta_value_num';
+		$args['order']    = $order;
+	} elseif ( 'rating' === $order_by ) {
+		$args['meta_key'] = '_wc_average_rating';
+		$args['orderby']  = 'meta_value_num';
+		$args['order']    = $order;
+	} elseif ( 'price' === $order_by ) {
+		$args['meta_key'] = '_price';
+		$args['orderby']  = 'meta_value_num';
+		$args['order']    = $order;
+	} else {
+		$args['orderby'] = $order_by;
+		$args['order']   = $order;
+	}
 
 	// Handle manual product selection
 	if ( 'manual' === $query_source && ! empty( $product_ids ) ) {
@@ -146,20 +162,18 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 	// Generate unique ID for this block instance
 	$block_id = 'wcba-grid-' . wp_unique_id();
 
-	// Calculate grid CSS variables
-	$grid_styles = sprintf(
-		'--wcba-grid-columns: %d; --wcba-grid-columns-tablet: %d; --wcba-grid-columns-mobile: %d; --wcba-grid-gap: %dpx; --wcba-card-padding: %dpx; --wcba-card-radius: %dpx;',
-		$columns,
-		$columns_tablet,
-		$columns_mobile,
-		$gap,
-		$card_padding,
-		$card_radius
-	);
+	// Calculate CSS variables for grid (will be applied directly to grid element)
+	// Card variables will be applied to the parent container
+
+	// Prepare attributes JSON for AJAX requests
+	$attributes_json = wp_json_encode( $attributes );
+
+	// Generate nonce for AJAX security
+	$ajax_nonce = wp_create_nonce( 'wcba-ajax-nonce' );
 
 	ob_start();
 	?>
-	<div class="wcba-product-grid-advanced" id="<?php echo esc_attr( $block_id ); ?>" style="<?php echo esc_attr( $grid_styles ); ?>">
+	<div class="wcba-product-grid-advanced" id="<?php echo esc_attr( $block_id ); ?>" style="--wcba-card-padding: <?php echo esc_attr( $card_padding ); ?>px; --wcba-card-radius: <?php echo esc_attr( $card_radius ); ?>px;" data-attributes="<?php echo esc_attr( $attributes_json ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-ajax-url="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 		<?php if ( $enable_filters || $enable_sorting ) : ?>
 			<div class="wcba-grid-controls">
 				<?php if ( $enable_sorting ) : ?>
@@ -239,7 +253,7 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 		<?php endif; ?>
 
 		<div class="wcba-grid-container">
-			<div class="wcba-product-grid <?php echo esc_attr( $card_shadow ? 'has-shadow' : '' ); ?> <?php echo esc_attr( $card_hover_shadow ? 'has-hover-shadow' : '' ); ?>" data-block-id="<?php echo esc_attr( $block_id ); ?>">
+			<div class="wcba-product-grid <?php echo esc_attr( $card_shadow ? 'has-shadow' : '' ); ?> <?php echo esc_attr( $card_hover_shadow ? 'has-hover-shadow' : '' ); ?>" data-block-id="<?php echo esc_attr( $block_id ); ?>" style="--wcba-grid-columns: <?php echo max( 1, absint( $columns ) ); ?>; --wcba-grid-columns-tablet: <?php echo max( 1, absint( $columns_tablet ) ); ?>; --wcba-grid-columns-mobile: <?php echo max( 1, absint( $columns_mobile ) ); ?>; --wcba-grid-gap: <?php echo max( 0, absint( $gap ) ); ?>px;">
 				<?php if ( ! empty( $products ) ) : ?>
 					<?php foreach ( $products as $post ) : ?>
 						<?php

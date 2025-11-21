@@ -197,7 +197,7 @@
       "__experimentalFontWeight": true
     }
   },
-  "style": "file:./style.css",
+  "style": "file:./style-index.css",
   "editorStyle": "file:./editor.css",
   "editorScript": "file:./index.js",
   "viewScript": "file:./view.js"

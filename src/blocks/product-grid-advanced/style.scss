@@ -1,11 +1,4 @@
 .wcba-product-grid-advanced {
-	--wcba-grid-columns: 4;
-	--wcba-grid-columns-tablet: 3;
-	--wcba-grid-columns-mobile: 2;
-	--wcba-grid-gap: 20px;
-	--wcba-card-padding: 0;
-	--wcba-card-radius: 0;
-
 	margin: 0;
 	padding: 0;
 
@@ -108,18 +101,18 @@
 
 	.wcba-product-grid {
 		display: grid;
-		grid-template-columns: repeat(var(--wcba-grid-columns), 1fr);
-		gap: var(--wcba-grid-gap);
+		grid-template-columns: repeat(var(--wcba-grid-columns, 4), 1fr);
+		gap: var(--wcba-grid-gap, 20px);
 		margin: 0;
 		padding: 0;
 		list-style: none;
 
 		@media (max-width: 768px) {
-			grid-template-columns: repeat(var(--wcba-grid-columns-tablet), 1fr);
+			grid-template-columns: repeat(var(--wcba-grid-columns-tablet, 3), 1fr);
 		}
 
 		@media (max-width: 480px) {
-			grid-template-columns: repeat(var(--wcba-grid-columns-mobile), 1fr);
+			grid-template-columns: repeat(var(--wcba-grid-columns-mobile, 2), 1fr);
 		}
 
 		&.has-shadow {
@@ -144,8 +137,8 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		padding: var(--wcba-card-padding);
-		border-radius: var(--wcba-card-radius);
+		padding: var(--wcba-card-padding, 0px);
+		border-radius: var(--wcba-card-radius, 0px);
 		background: #fff;
 		transition: transform 0.2s, box-shadow 0.2s;
 		overflow: hidden;

@@ -10,6 +10,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		overlayStyle,
 		imageSwapEnabled,
 		showPrice,
+		showSku,
 		showSaleBadge,
 		showDiscountPercent,
 		showCustomBadge,
@@ -101,6 +102,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Show Price', 'wcba' ) }
 						checked={ !!showPrice }
 						onChange={ ( val ) => setAttributes( { showPrice: !!val } ) }
+					/>
+					<ToggleControl
+						label={__('Show SKU', 'wcba')}
+						checked={!!showSku}
+						onChange={(val) => setAttributes({ showSku: !!val })}
 					/>
 
 					<ToggleControl

@@ -12,6 +12,7 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		$overlay        = ! empty( $attributes['overlayEnabled'] );
 		$overlay_style  = isset( $attributes['overlayStyle'] ) ? sanitize_key( $attributes['overlayStyle'] ) : 'none';
 		$show_price     = isset( $attributes['showPrice'] ) ? (bool) $attributes['showPrice'] : true;
+		$show_sku = isset($attributes['showSku']) ? (bool) $attributes['showSku'] : false;
 		$show_sale      = ! empty( $attributes['showSaleBadge'] );
 		$show_discount  = ! empty( $attributes['showDiscountPercent'] );
 		$show_custom    = ! empty( $attributes['showCustomBadge'] );
@@ -36,6 +37,7 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		
 		$regular_price = $product->get_regular_price();
 		$sale_price    = $product->get_sale_price();
+		$sku_value = $product->get_sku();
 		
 		$price_html = '';
 		if ( $show_price ) {
@@ -48,7 +50,12 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 			}
 			$price_html .= '</div>';
 		}
-		
+
+		$sku_html = '';
+		if ($show_sku && $sku_value) {
+			$sku_html = '<div class="wcba-card__sku">' . esc_html__('SKU:', 'wcba') . ' ' . esc_html($sku_value) . '</div>';
+		}
+
 		$badges_html = '<div class="wcba-card__badges">';
 		if ( $show_sale && $product->is_on_sale() ) {
 			$badges_html .= '<span class="wcba-badge wcba-badge--sale">' . esc_html__( 'Sale', 'wcba' ) . '</span>';
@@ -98,6 +105,7 @@ if ( ! function_exists( 'wcba_render_advanced_product_card' ) ) {
 		</div>
 		<div class="wcba-card__content">
 		<h3 class="wcba-card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a></h3>
+		<?php echo $sku_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo $price_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<div class="wcba-card__actions"><?php echo $add_to_cart_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 		</div>

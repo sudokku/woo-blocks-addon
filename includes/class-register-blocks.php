@@ -26,6 +26,7 @@ class Register_Blocks {
 								continue;
 							}
 							$args = [];
+							// Resolve render callback (supports "render": "file:..." or function name)
 							if (is_array($meta) && !empty($meta['render'])) {
 								$render_meta = $meta['render'];
 								$callback = null;
@@ -45,6 +46,28 @@ class Register_Blocks {
 									$args['render_callback'] = $callback;
 								}
 							}
+							// Ensure styles are registered even if block.json points to non-existent filenames
+							$block_base_url = trailingslashit(WCBA_BUILD_URL) . 'blocks/' . $entry . '/';
+							$style_candidates = ['style-index.css', 'style.css'];
+							$editor_style_candidates = ['index.css', 'editor.css'];
+							foreach ($style_candidates as $file) {
+								$path = trailingslashit($maybe_dir) . $file;
+								if (file_exists($path)) {
+									$handle = sanitize_key(str_replace('/', '-', $name) . '-style');
+									wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+									$args['style'] = $handle;
+									break;
+								}
+							}
+							foreach ($editor_style_candidates as $file) {
+								$path = trailingslashit($maybe_dir) . $file;
+								if (file_exists($path)) {
+									$handle = sanitize_key(str_replace('/', '-', $name) . '-editor-style');
+									wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+									$args['editor_style'] = $handle;
+									break;
+								}
+							}
 							register_block_type($maybe_dir, $args);
 						}
 					}
@@ -58,6 +81,7 @@ class Register_Blocks {
 				$name = is_array($meta) && !empty($meta['name']) ? $meta['name'] : null;
 				if (!$name || !\WP_Block_Type_Registry::get_instance()->is_registered($name)) {
 					$args = [];
+					// Resolve render callback
 					if (is_array($meta) && !empty($meta['render'])) {
 						$render_meta = $meta['render'];
 						$callback = null;
@@ -75,6 +99,28 @@ class Register_Blocks {
 						}
 						if (is_string($callback) || is_callable($callback)) {
 							$args['render_callback'] = $callback;
+						}
+					}
+					// Ensure styles for root build block
+					$block_base_url = trailingslashit(WCBA_BUILD_URL);
+					$style_candidates = ['style-index.css', 'style.css'];
+					$editor_style_candidates = ['index.css', 'editor.css'];
+					foreach ($style_candidates as $file) {
+						$path = trailingslashit(WCBA_BUILD_PATH) . $file;
+						if (file_exists($path)) {
+							$handle = $name ? sanitize_key(str_replace('/', '-', $name) . '-style') : 'wcba-root-style';
+							wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+							$args['style'] = $handle;
+							break;
+						}
+					}
+					foreach ($editor_style_candidates as $file) {
+						$path = trailingslashit(WCBA_BUILD_PATH) . $file;
+						if (file_exists($path)) {
+							$handle = $name ? sanitize_key(str_replace('/', '-', $name) . '-editor-style') : 'wcba-root-editor-style';
+							wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+							$args['editor_style'] = $handle;
+							break;
 						}
 					}
 					register_block_type(WCBA_BUILD_PATH, $args);
@@ -100,6 +146,7 @@ class Register_Blocks {
 							continue;
 						}
 						$args = [];
+						// Resolve render callback
 						if (is_array($meta) && !empty($meta['render'])) {
 							$render_meta = $meta['render'];
 							$callback = null;
@@ -117,6 +164,28 @@ class Register_Blocks {
 							}
 							if (is_string($callback) || is_callable($callback)) {
 								$args['render_callback'] = $callback;
+							}
+						}
+						// Try to attach styles from src if present (useful in dev)
+						$block_base_url = trailingslashit(WCBA_URL) . 'src/blocks/' . $entry . '/';
+						$style_candidates = ['style.css'];
+						$editor_style_candidates = ['editor.css'];
+						foreach ($style_candidates as $file) {
+							$path = trailingslashit($maybe_dir) . $file;
+							if (file_exists($path)) {
+								$handle = sanitize_key(str_replace('/', '-', $name) . '-style');
+								wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+								$args['style'] = $handle;
+								break;
+							}
+						}
+						foreach ($editor_style_candidates as $file) {
+							$path = trailingslashit($maybe_dir) . $file;
+							if (file_exists($path)) {
+								$handle = sanitize_key(str_replace('/', '-', $name) . '-editor-style');
+								wp_register_style($handle, $block_base_url . $file, [], WCBA_VERSION);
+								$args['editor_style'] = $handle;
+								break;
 							}
 						}
 						register_block_type($maybe_dir, $args);

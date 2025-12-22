@@ -14,6 +14,7 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 	$in_stock         = ! empty( $attributes['inStock'] );
 	$price_min        = isset( $attributes['priceMin'] ) ? floatval( $attributes['priceMin'] ) : 0;
 	$price_max        = isset( $attributes['priceMax'] ) ? floatval( $attributes['priceMax'] ) : 0;
+	$min_rating       = isset( $attributes['minRating'] ) ? absint( $attributes['minRating'] ) : 0;
 	$order_by         = isset( $attributes['orderBy'] ) ? sanitize_key( $attributes['orderBy'] ) : 'date';
 	$order            = isset( $attributes['order'] ) ? strtoupper( sanitize_key( $attributes['order'] ) ) : 'DESC';
 	$per_page         = isset( $attributes['perPage'] ) ? absint( $attributes['perPage'] ) : 12;
@@ -143,6 +144,19 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 			$price_query['value'][1] = 999999;
 		}
 		$args['meta_query'][] = $price_query;
+	}
+
+	// Handle minimum rating filter
+	if ( $min_rating > 0 ) {
+		if ( ! isset( $args['meta_query'] ) ) {
+			$args['meta_query'] = [];
+		}
+		$args['meta_query'][] = [
+			'key'     => '_wc_average_rating',
+			'value'   => $min_rating,
+			'compare' => '>=',
+			'type'    => 'NUMERIC',
+		];
 	}
 
 	// Set relation for multiple tax queries

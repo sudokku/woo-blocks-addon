@@ -73,7 +73,7 @@ class Ajax_Handler {
 		}
 
 		$attributes_json = isset( $_POST['attributes'] ) ? wp_unslash( $_POST['attributes'] ) : '';
-		$filters         = isset( $_POST['filters'] ) ? $_POST['filters'] : [];
+		$filters_json    = isset( $_POST['filters'] ) ? wp_unslash( $_POST['filters'] ) : '{}';
 		$block_id        = isset( $_POST['blockId'] ) ? sanitize_text_field( $_POST['blockId'] ) : '';
 
 		if ( empty( $attributes_json ) || empty( $block_id ) ) {
@@ -85,22 +85,42 @@ class Ajax_Handler {
 			wp_send_json_error( [ 'message' => __( 'Invalid attributes.', 'wcba' ) ] );
 		}
 
+		// Decode filters JSON
+		$filters = json_decode( $filters_json, true );
+		if ( ! is_array( $filters ) ) {
+			$filters = [];
+		}
+
 		// Apply filters to attributes
-		if ( isset( $filters['categories'] ) && is_array( $filters['categories'] ) ) {
+		if ( isset( $filters['categories'] ) && is_array( $filters['categories'] ) && ! empty( $filters['categories'] ) ) {
 			$attributes['categories'] = array_map( 'absint', $filters['categories'] );
+			$attributes['querySource'] = 'category';
+		} elseif ( isset( $filters['categories'] ) && empty( $filters['categories'] ) ) {
+			// Reset categories if empty
+			$attributes['categories'] = [];
+			if ( 'category' === $attributes['querySource'] ) {
+				$attributes['querySource'] = 'all';
+			}
 		}
-		if ( isset( $filters['priceMin'] ) ) {
+		if ( isset( $filters['priceMin'] ) && $filters['priceMin'] !== '' ) {
 			$attributes['priceMin'] = floatval( $filters['priceMin'] );
+		} elseif ( isset( $filters['priceMin'] ) && $filters['priceMin'] === '' ) {
+			$attributes['priceMin'] = 0;
 		}
-		if ( isset( $filters['priceMax'] ) ) {
+		if ( isset( $filters['priceMax'] ) && $filters['priceMax'] !== '' ) {
 			$attributes['priceMax'] = floatval( $filters['priceMax'] );
+		} elseif ( isset( $filters['priceMax'] ) && $filters['priceMax'] === '' ) {
+			$attributes['priceMax'] = 0;
 		}
-		if ( isset( $filters['rating'] ) ) {
-			// Rating filter will be handled in render
-			$attributes['filterRating'] = absint( $filters['rating'] );
+		if ( isset( $filters['rating'] ) && $filters['rating'] !== '' ) {
+			$attributes['minRating'] = absint( $filters['rating'] );
+		} else {
+			$attributes['minRating'] = 0;
 		}
 		if ( isset( $filters['stock'] ) && $filters['stock'] === 'instock' ) {
 			$attributes['inStock'] = true;
+		} else {
+			$attributes['inStock'] = false;
 		}
 		$attributes['paged'] = 1; // Reset to first page when filtering
 

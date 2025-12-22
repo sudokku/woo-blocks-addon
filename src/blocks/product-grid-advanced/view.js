@@ -124,7 +124,6 @@
 				return;
 			}
 
-			// Collect filter values
 			const filters = {};
 			
 			const categorySelect = filtersContainer.querySelector( '[data-filter="category"]' );
@@ -158,12 +157,28 @@
 				gridContainer.style.pointerEvents = 'none';
 			}
 
+			// Update attributes to match the user's filtering
+			const attributes = JSON.parse(attributesJson);
+			if (filters.categories && filters.categories.length) {
+				attributes.querySource = 'category';
+				attributes.categories = filters.categories;
+			} else if (filters.tags && filters.tags.length) {
+				attributes.querySource = 'tag';
+				attributes.tags = filters.tags;
+			} else if (!filters.categories || filters.categories.length === 0) {
+				// No category filter: only reset if querySource was category
+				if (attributes.querySource === 'category') {
+					attributes.querySource = 'all';
+					attributes.categories = [];
+				}
+			}
+
 			// Make AJAX request
 			const formData = new FormData();
 			formData.append( 'action', 'wcba_filter_products' );
 			formData.append( 'nonce', nonce );
 			formData.append( 'blockId', blockId );
-			formData.append( 'attributes', attributesJson );
+			formData.append( 'attributes', JSON.stringify( attributes ) );
 			formData.append( 'filters', JSON.stringify( filters ) );
 
 			fetch( ajaxUrl, {
@@ -173,7 +188,6 @@
 				.then( response => response.json() )
 				.then( data => {
 					if ( data.success && data.data && data.data.html ) {
-						// Replace the grid and pagination with new content
 						const tempDiv = document.createElement( 'div' );
 						tempDiv.innerHTML = data.data.html;
 						
@@ -184,8 +198,9 @@
 						
 						if ( newGridContainer ) {
 							// Replace grid container
-							if ( gridContainer ) {
-								gridContainer.replaceWith( newGridContainer );
+							const oldGridContainer = blockContainer.querySelector( '.wcba-grid-container' );
+							if ( oldGridContainer ) {
+								oldGridContainer.replaceWith( newGridContainer );
 							}
 							
 							// Update pagination
@@ -232,6 +247,11 @@
 			filtersContainer.querySelectorAll( 'select, input' ).forEach( input => {
 				if ( input.type === 'checkbox' ) {
 					input.checked = false;
+				} else if ( input.tagName === 'SELECT' && input.multiple ) {
+					// Clear all selected options in multiple select
+					Array.from( input.options ).forEach( option => {
+						option.selected = false;
+					} );
 				} else {
 					input.value = '';
 				}

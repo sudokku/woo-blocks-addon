@@ -204,7 +204,6 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 						</select>
 					</div>
 				<?php endif; ?>
-
 				<?php if ( $enable_filters ) : ?>
 					<div class="wcba-grid-filters" data-block-id="<?php echo esc_attr( $block_id ); ?>">
 						<?php if ( $filter_categories ) : ?>
@@ -215,9 +214,9 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 									'taxonomy'   => 'product_cat',
 									'hide_empty' => true,
 								] );
-								if ( ! is_wp_error( $product_cats ) && ! empty( $product_cats ) ) :
-									?>
-									<select class="wcba-filter-select" data-filter="category" multiple>
+								if ( ! is_wp_error( $product_cats ) && ! empty( $product_cats ) ) : ?>
+									<select class="wcba-filter-select" data-filter="category">
+										<option value=""><?php esc_html_e( 'All Categories', 'wcba' ); ?></option>
 										<?php foreach ( $product_cats as $cat ) : ?>
 											<option value="<?php echo esc_attr( $cat->term_id ); ?>"><?php echo esc_html( $cat->name ); ?></option>
 										<?php endforeach; ?>
@@ -225,7 +224,6 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-
 						<?php if ( $filter_price ) : ?>
 							<div class="wcba-filter-price">
 								<label><?php esc_html_e( 'Price Range', 'wcba' ); ?></label>
@@ -236,7 +234,6 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 								</div>
 							</div>
 						<?php endif; ?>
-
 						<?php if ( $filter_rating ) : ?>
 							<div class="wcba-filter-rating">
 								<label><?php esc_html_e( 'Minimum Rating', 'wcba' ); ?></label>
@@ -249,7 +246,6 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 								</select>
 							</div>
 						<?php endif; ?>
-
 						<?php if ( $filter_stock ) : ?>
 							<div class="wcba-filter-stock">
 								<label>
@@ -258,7 +254,6 @@ function wcba_render_product_grid_advanced( $attributes, $content, $block ) {
 								</label>
 							</div>
 						<?php endif; ?>
-
 						<button class="wcba-filter-apply"><?php esc_html_e( 'Apply Filters', 'wcba' ); ?></button>
 						<button class="wcba-filter-reset"><?php esc_html_e( 'Reset', 'wcba' ); ?></button>
 					</div>

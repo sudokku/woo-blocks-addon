@@ -1,18 +1,19 @@
 .wcba-product-grid-advanced {
 	padding: 1rem;
-	border: 1px dashed #ccc;
+	// border: 1px dashed #ccc;
 	border-radius: 4px;
 	background: #f9f9f9;
 	min-height: 200px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 
-	&::before {
-		content: "Product Grid Advanced";
-		color: #666;
-		font-size: 0.875rem;
-		text-align: center;
-	}
+	// &::before {
+	// 	content: "Product Grid Advanced";
+	// 	color: #666;
+	// 	font-size: 0.875rem;
+	// 	text-align: center;
+	// }
 }
 

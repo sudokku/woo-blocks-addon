@@ -1,1 +1,854 @@
-(()=>{"use strict";var e,a={604:(e,a,l)=>{const o=window.wp.blocks,n=JSON.parse('{"UU":"wcba/product-grid-advanced"}'),t=window.wp.i18n,r=window.wp.blockEditor,c=window.wp.components,i=window.wp.data,s=window.wp.serverSideRender;var d=l.n(s);const g=window.ReactJSXRuntime;(0,o.registerBlockType)(n.UU,{edit:function({attributes:e,setAttributes:a}){const{querySource:l,productIds:o,categories:n,tags:s,featured:b,onSale:_,inStock:u,priceMin:w,priceMax:h,orderBy:C,order:p,perPage:v,columns:x,columnsTablet:m,columnsMobile:S,gap:j,enableFilters:y,filterCategories:k,filterPrice:f,filterRating:T,filterStock:P,enableSorting:R,paginationMode:B,showImage:O,showTitle:F,showPrice:A,showRating:M,showDescription:E,showSaleBadge:I,showNewBadge:L,showAddToCart:N,useAjaxCart:D,imageAspectRatio:H,imageHoverEffect:U,cardPadding:J,cardBorderRadius:q,cardShadow:G,cardHoverShadow:X}=e,z=(0,r.useBlockProps)({className:"wcba-product-grid-advanced"}),{items:Q,isLoading:Z}=(0,i.useSelect)(e=>{const{getEntityRecords:a,isResolving:l}=e("core");return{items:a("taxonomy","product_cat",{per_page:-1,orderby:"name",order:"asc"})||[],isLoading:l("getEntityRecords",["taxonomy","product_cat"])}},[]),{items:$,isLoading:K}=(0,i.useSelect)(e=>{const{getEntityRecords:a,isResolving:l}=e("core");return{items:a("taxonomy","product_tag",{per_page:-1,orderby:"name",order:"asc"})||[],isLoading:l("getEntityRecords",["taxonomy","product_tag"])}},[]),[V,W]=wp.element.useState(""),{items:Y,isLoading:ee}=(0,i.useSelect)(e=>{const{getEntityRecords:a,isResolving:l}=e("core"),o=V&&V.length>1?{search:V,per_page:20,status:"publish"}:{per_page:10,status:"publish"};return{items:a("postType","product",o)||[],isLoading:l("getEntityRecords",["postType","product",o])}},[V]);return(0,g.jsxs)(g.Fragment,{children:[(0,g.jsxs)(r.InspectorControls,{children:[(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Product Source","wcba"),initialOpen:!0,children:[(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Query Source","wcba"),value:l,options:[{label:(0,t.__)("All Products","wcba"),value:"all"},{label:(0,t.__)("By Category","wcba"),value:"category"},{label:(0,t.__)("By Tag","wcba"),value:"tag"},{label:(0,t.__)("Featured Products","wcba"),value:"featured"},{label:(0,t.__)("On Sale Products","wcba"),value:"onsale"},{label:(0,t.__)("Manual Selection","wcba"),value:"manual"}],onChange:e=>a({querySource:e})}),"category"===l&&(0,g.jsx)(g.Fragment,{children:Z?(0,g.jsx)(c.Spinner,{}):(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Categories","wcba"),value:n.length>0?n[0]:"",options:[{label:(0,t.__)("— Select —","wcba"),value:""},...Q.map(e=>({label:e.name,value:e.id}))],onChange:e=>a({categories:e?[parseInt(e,10)]:[]})})}),"tag"===l&&(0,g.jsx)(g.Fragment,{children:K?(0,g.jsx)(c.Spinner,{}):(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Tags","wcba"),value:s.length>0?s[0]:"",options:[{label:(0,t.__)("— Select —","wcba"),value:""},...$.map(e=>({label:e.name,value:e.id}))],onChange:e=>a({tags:e?[parseInt(e,10)]:[]})})}),"manual"===l&&(0,g.jsxs)(g.Fragment,{children:[(0,g.jsx)(c.TextControl,{label:(0,t.__)("Search Products","wcba"),value:V,onChange:W}),ee?(0,g.jsx)(c.Spinner,{}):(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Selected Products","wcba"),value:o.length>0?o[0]:"",options:[{label:(0,t.__)("— Select —","wcba"),value:""},...Y.map(e=>({label:e.title?.rendered||`#${e.id}`,value:e.id}))],onChange:e=>a({productIds:e?[parseInt(e,10)]:[]})})]}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Featured Products Only","wcba"),checked:!!b,onChange:e=>a({featured:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("On Sale Only","wcba"),checked:!!_,onChange:e=>a({onSale:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("In Stock Only","wcba"),checked:!!u,onChange:e=>a({inStock:!!e})}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Minimum Price","wcba"),value:w,onChange:e=>a({priceMin:e}),min:0,max:1e3}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Maximum Price","wcba"),value:h,onChange:e=>a({priceMax:e}),min:0,max:1e3})]}),(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Sorting","wcba"),children:[(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Order By","wcba"),value:C,options:[{label:(0,t.__)("Date","wcba"),value:"date"},{label:(0,t.__)("Price","wcba"),value:"price"},{label:(0,t.__)("Popularity","wcba"),value:"popularity"},{label:(0,t.__)("Rating","wcba"),value:"rating"},{label:(0,t.__)("Title","wcba"),value:"title"}],onChange:e=>a({orderBy:e})}),(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Order","wcba"),value:p,options:[{label:(0,t.__)("Ascending","wcba"),value:"ASC"},{label:(0,t.__)("Descending","wcba"),value:"DESC"}],onChange:e=>a({order:e})}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Products Per Page","wcba"),value:v,onChange:e=>a({perPage:e}),min:1,max:100})]}),(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Grid Layout","wcba"),children:[(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Columns (Desktop)","wcba"),value:x,onChange:e=>a({columns:e}),min:1,max:6}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Columns (Tablet)","wcba"),value:m,onChange:e=>a({columnsTablet:e}),min:1,max:4}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Columns (Mobile)","wcba"),value:S,onChange:e=>a({columnsMobile:e}),min:1,max:3}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Gap (px)","wcba"),value:j,onChange:e=>a({gap:e}),min:0,max:50}),(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Pagination Mode","wcba"),value:B,options:[{label:(0,t.__)("Numbers","wcba"),value:"numbers"},{label:(0,t.__)("Load More Button","wcba"),value:"loadmore"},{label:(0,t.__)("Infinite Scroll","wcba"),value:"infinite"},{label:(0,t.__)("None","wcba"),value:"none"}],onChange:e=>a({paginationMode:e})})]}),(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Card Content","wcba"),children:[(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Image","wcba"),checked:!!O,onChange:e=>a({showImage:!!e})}),O&&(0,g.jsxs)(g.Fragment,{children:[(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Image Aspect Ratio","wcba"),value:H,options:[{label:(0,t.__)("1:1","wcba"),value:"1:1"},{label:(0,t.__)("4:3","wcba"),value:"4:3"},{label:(0,t.__)("16:9","wcba"),value:"16:9"},{label:(0,t.__)("3:4","wcba"),value:"3:4"},{label:(0,t.__)("Auto","wcba"),value:"auto"}],onChange:e=>a({imageAspectRatio:e})}),(0,g.jsx)(c.SelectControl,{label:(0,t.__)("Image Hover Effect","wcba"),value:U,options:[{label:(0,t.__)("None","wcba"),value:"none"},{label:(0,t.__)("Zoom","wcba"),value:"zoom"},{label:(0,t.__)("Fade","wcba"),value:"fade"},{label:(0,t.__)("Slide","wcba"),value:"slide"}],onChange:e=>a({imageHoverEffect:e})})]}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Title","wcba"),checked:!!F,onChange:e=>a({showTitle:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Price","wcba"),checked:!!A,onChange:e=>a({showPrice:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Rating","wcba"),checked:!!M,onChange:e=>a({showRating:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Description","wcba"),checked:!!E,onChange:e=>a({showDescription:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Sale Badge","wcba"),checked:!!I,onChange:e=>a({showSaleBadge:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show New Badge","wcba"),checked:!!L,onChange:e=>a({showNewBadge:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Show Add to Cart","wcba"),checked:!!N,onChange:e=>a({showAddToCart:!!e})}),N&&(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("AJAX Add to Cart","wcba"),checked:!!D,onChange:e=>a({useAjaxCart:!!e})})]}),(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Frontend Filters","wcba"),children:[(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Enable Filters","wcba"),checked:!!y,onChange:e=>a({enableFilters:!!e})}),y&&(0,g.jsxs)(g.Fragment,{children:[(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Category Filter","wcba"),checked:!!k,onChange:e=>a({filterCategories:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Price Filter","wcba"),checked:!!f,onChange:e=>a({filterPrice:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Rating Filter","wcba"),checked:!!T,onChange:e=>a({filterRating:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Stock Filter","wcba"),checked:!!P,onChange:e=>a({filterStock:!!e})})]}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Enable Sorting","wcba"),checked:!!R,onChange:e=>a({enableSorting:!!e})})]}),(0,g.jsxs)(c.PanelBody,{title:(0,t.__)("Card Styling","wcba"),children:[(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Card Padding (px)","wcba"),value:J,onChange:e=>a({cardPadding:e}),min:0,max:50}),(0,g.jsx)(c.RangeControl,{label:(0,t.__)("Border Radius (px)","wcba"),value:q,onChange:e=>a({cardBorderRadius:e}),min:0,max:50}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Card Shadow","wcba"),checked:!!G,onChange:e=>a({cardShadow:!!e})}),(0,g.jsx)(c.ToggleControl,{label:(0,t.__)("Hover Shadow","wcba"),checked:!!X,onChange:e=>a({cardHoverShadow:!!e})})]})]}),(0,g.jsx)("div",{...z,children:(0,g.jsx)(d(),{block:"wcba/product-grid-advanced",attributes:e})})]})},save:function(){return null}})}},l={};function o(e){var n=l[e];if(void 0!==n)return n.exports;var t=l[e]={exports:{}};return a[e](t,t.exports,o),t.exports}o.m=a,e=[],o.O=(a,l,n,t)=>{if(!l){var r=1/0;for(d=0;d<e.length;d++){for(var[l,n,t]=e[d],c=!0,i=0;i<l.length;i++)(!1&t||r>=t)&&Object.keys(o.O).every(e=>o.O[e](l[i]))?l.splice(i--,1):(c=!1,t<r&&(r=t));if(c){e.splice(d--,1);var s=n();void 0!==s&&(a=s)}}return a}t=t||0;for(var d=e.length;d>0&&e[d-1][2]>t;d--)e[d]=e[d-1];e[d]=[l,n,t]},o.n=e=>{var a=e&&e.__esModule?()=>e.default:()=>e;return o.d(a,{a}),a},o.d=(e,a)=>{for(var l in a)o.o(a,l)&&!o.o(e,l)&&Object.defineProperty(e,l,{enumerable:!0,get:a[l]})},o.o=(e,a)=>Object.prototype.hasOwnProperty.call(e,a),(()=>{var e={568:0,64:0};o.O.j=a=>0===e[a];var a=(a,l)=>{var n,t,[r,c,i]=l,s=0;if(r.some(a=>0!==e[a])){for(n in c)o.o(c,n)&&(o.m[n]=c[n]);if(i)var d=i(o)}for(a&&a(l);s<r.length;s++)t=r[s],o.o(e,t)&&e[t]&&e[t][0](),e[t]=0;return o.O(d)},l=globalThis.webpackChunkwoocommerce_blocks_addon=globalThis.webpackChunkwoocommerce_blocks_addon||[];l.forEach(a.bind(null,0)),l.push=a.bind(null,l.push.bind(l))})();var n=o.O(void 0,[64],()=>o(604));n=o.O(n)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/blocks/product-grid-advanced/block.json":
+/*!*****************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/block.json ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"wcba/product-grid-advanced","title":"Product Grid Advanced","category":"woocommerce","description":"A highly customizable WooCommerce block that displays products in a flexible grid layout with integrated filtering, sorting, and display controls.","keywords":["product","woocommerce","grid","filter","category","shop"],"textdomain":"wcba","attributes":{"querySource":{"type":"string","default":"all"},"productIds":{"type":"array","default":[]},"categories":{"type":"array","default":[]},"tags":{"type":"array","default":[]},"featured":{"type":"boolean","default":false},"onSale":{"type":"boolean","default":false},"inStock":{"type":"boolean","default":false},"priceMin":{"type":"number","default":0},"priceMax":{"type":"number","default":0},"orderBy":{"type":"string","default":"date"},"order":{"type":"string","default":"DESC"},"perPage":{"type":"number","default":12},"columns":{"type":"number","default":4},"columnsTablet":{"type":"number","default":3},"columnsMobile":{"type":"number","default":2},"gap":{"type":"number","default":20},"enableFilters":{"type":"boolean","default":false},"filterCategories":{"type":"boolean","default":true},"filterPrice":{"type":"boolean","default":true},"filterRating":{"type":"boolean","default":false},"filterStock":{"type":"boolean","default":false},"enableSorting":{"type":"boolean","default":true},"paginationMode":{"type":"string","default":"numbers"},"showImage":{"type":"boolean","default":true},"showTitle":{"type":"boolean","default":true},"showPrice":{"type":"boolean","default":true},"showRating":{"type":"boolean","default":true},"showDescription":{"type":"boolean","default":false},"showSaleBadge":{"type":"boolean","default":true},"showNewBadge":{"type":"boolean","default":false},"showAddToCart":{"type":"boolean","default":true},"useAjaxCart":{"type":"boolean","default":true},"imageAspectRatio":{"type":"string","default":"1:1"},"imageHoverEffect":{"type":"string","default":"none"},"cardPadding":{"type":"number","default":0},"cardBorderRadius":{"type":"number","default":0},"cardShadow":{"type":"boolean","default":false},"cardHoverShadow":{"type":"boolean","default":true}},"render":"file:./render.php","supports":{"align":["wide","full"],"spacing":{"margin":true,"padding":true,"blockGap":true},"color":{"background":true,"text":true,"gradients":true,"link":true},"border":{"radius":true,"color":true,"style":true,"width":true},"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true}},"style":"file:./style-index.css","editorStyle":"file:./editor.css","editorScript":"file:./index.js","viewScript":"file:./view.js"}');
+
+/***/ }),
+
+/***/ "./src/blocks/product-grid-advanced/edit.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/edit.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    querySource,
+    productIds,
+    categories,
+    tags,
+    featured,
+    onSale,
+    inStock,
+    priceMin,
+    priceMax,
+    orderBy,
+    order,
+    perPage,
+    columns,
+    columnsTablet,
+    columnsMobile,
+    gap,
+    enableFilters,
+    filterCategories,
+    filterPrice,
+    filterRating,
+    filterStock,
+    enableSorting,
+    paginationMode,
+    showImage,
+    showTitle,
+    showPrice,
+    showRating,
+    showDescription,
+    showSaleBadge,
+    showNewBadge,
+    showAddToCart,
+    useAjaxCart,
+    imageAspectRatio,
+    imageHoverEffect,
+    cardPadding,
+    cardBorderRadius,
+    cardShadow,
+    cardHoverShadow
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+    className: 'wcba-product-grid-advanced'
+  });
+
+  // Fetch categories
+  const {
+    items: categoriesList,
+    isLoading: categoriesLoading
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getEntityRecords,
+      isResolving
+    } = select('core');
+    return {
+      items: getEntityRecords('taxonomy', 'product_cat', {
+        per_page: -1,
+        orderby: 'name',
+        order: 'asc'
+      }) || [],
+      isLoading: isResolving('getEntityRecords', ['taxonomy', 'product_cat'])
+    };
+  }, []);
+
+  // Fetch tags
+  const {
+    items: tagsList,
+    isLoading: tagsLoading
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getEntityRecords,
+      isResolving
+    } = select('core');
+    return {
+      items: getEntityRecords('taxonomy', 'product_tag', {
+        per_page: -1,
+        orderby: 'name',
+        order: 'asc'
+      }) || [],
+      isLoading: isResolving('getEntityRecords', ['taxonomy', 'product_tag'])
+    };
+  }, []);
+
+  // Fetch products for manual selection
+  const [productSearch, setProductSearch] = wp.element.useState('');
+  const {
+    items: productsList,
+    isLoading: productsLoading
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getEntityRecords,
+      isResolving
+    } = select('core');
+    const query = productSearch && productSearch.length > 1 ? {
+      search: productSearch,
+      per_page: 20,
+      status: 'publish'
+    } : {
+      per_page: 10,
+      status: 'publish'
+    };
+    return {
+      items: getEntityRecords('postType', 'product', query) || [],
+      isLoading: isResolving('getEntityRecords', ['postType', 'product', query])
+    };
+  }, [productSearch]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Product Source', 'wcba'),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Query Source', 'wcba'),
+          value: querySource,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All Products', 'wcba'),
+            value: 'all'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('By Category', 'wcba'),
+            value: 'category'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('By Tag', 'wcba'),
+            value: 'tag'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Featured Products', 'wcba'),
+            value: 'featured'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('On Sale Products', 'wcba'),
+            value: 'onsale'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Manual Selection', 'wcba'),
+            value: 'manual'
+          }],
+          onChange: val => setAttributes({
+            querySource: val
+          })
+        }), querySource === 'category' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: categoriesLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Categories', 'wcba'),
+            value: categories.length > 0 ? categories[0] : '',
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('— Select —', 'wcba'),
+              value: ''
+            }, ...categoriesList.map(cat => ({
+              label: cat.name,
+              value: cat.id
+            }))],
+            onChange: val => setAttributes({
+              categories: val ? [parseInt(val, 10)] : []
+            })
+          })
+        }), querySource === 'tag' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: tagsLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Tags', 'wcba'),
+            value: tags.length > 0 ? tags[0] : '',
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('— Select —', 'wcba'),
+              value: ''
+            }, ...tagsList.map(tag => ({
+              label: tag.name,
+              value: tag.id
+            }))],
+            onChange: val => setAttributes({
+              tags: val ? [parseInt(val, 10)] : []
+            })
+          })
+        }), querySource === 'manual' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Products', 'wcba'),
+            value: productSearch,
+            onChange: setProductSearch
+          }), productsLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Selected Products', 'wcba'),
+            value: productIds.length > 0 ? productIds[0] : '',
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('— Select —', 'wcba'),
+              value: ''
+            }, ...productsList.map(p => ({
+              label: p.title?.rendered || `#${p.id}`,
+              value: p.id
+            }))],
+            onChange: val => setAttributes({
+              productIds: val ? [parseInt(val, 10)] : []
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Featured Products Only', 'wcba'),
+          checked: !!featured,
+          onChange: val => setAttributes({
+            featured: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('On Sale Only', 'wcba'),
+          checked: !!onSale,
+          onChange: val => setAttributes({
+            onSale: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('In Stock Only', 'wcba'),
+          checked: !!inStock,
+          onChange: val => setAttributes({
+            inStock: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum Price', 'wcba'),
+          value: priceMin,
+          onChange: val => setAttributes({
+            priceMin: val
+          }),
+          min: 0,
+          max: 1000
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum Price', 'wcba'),
+          value: priceMax,
+          onChange: val => setAttributes({
+            priceMax: val
+          }),
+          min: 0,
+          max: 1000
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sorting', 'wcba'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order By', 'wcba'),
+          value: orderBy,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'wcba'),
+            value: 'date'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Price', 'wcba'),
+            value: 'price'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Popularity', 'wcba'),
+            value: 'popularity'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rating', 'wcba'),
+            value: 'rating'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Title', 'wcba'),
+            value: 'title'
+          }],
+          onChange: val => setAttributes({
+            orderBy: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order', 'wcba'),
+          value: order,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ascending', 'wcba'),
+            value: 'ASC'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Descending', 'wcba'),
+            value: 'DESC'
+          }],
+          onChange: val => setAttributes({
+            order: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Products Per Page', 'wcba'),
+          value: perPage,
+          onChange: val => setAttributes({
+            perPage: val
+          }),
+          min: 1,
+          max: 100
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grid Layout', 'wcba'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns (Desktop)', 'wcba'),
+          value: columns,
+          onChange: val => setAttributes({
+            columns: val
+          }),
+          min: 1,
+          max: 6
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns (Tablet)', 'wcba'),
+          value: columnsTablet,
+          onChange: val => setAttributes({
+            columnsTablet: val
+          }),
+          min: 1,
+          max: 4
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns (Mobile)', 'wcba'),
+          value: columnsMobile,
+          onChange: val => setAttributes({
+            columnsMobile: val
+          }),
+          min: 1,
+          max: 3
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Gap (px)', 'wcba'),
+          value: gap,
+          onChange: val => setAttributes({
+            gap: val
+          }),
+          min: 0,
+          max: 50
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pagination Mode', 'wcba'),
+          value: paginationMode,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Numbers', 'wcba'),
+            value: 'numbers'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Load More Button', 'wcba'),
+            value: 'loadmore'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Infinite Scroll', 'wcba'),
+            value: 'infinite'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'wcba'),
+            value: 'none'
+          }],
+          onChange: val => setAttributes({
+            paginationMode: val
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Card Content', 'wcba'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Image', 'wcba'),
+          checked: !!showImage,
+          onChange: val => setAttributes({
+            showImage: !!val
+          })
+        }), showImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image Aspect Ratio', 'wcba'),
+            value: imageAspectRatio,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('1:1', 'wcba'),
+              value: '1:1'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('4:3', 'wcba'),
+              value: '4:3'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('16:9', 'wcba'),
+              value: '16:9'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('3:4', 'wcba'),
+              value: '3:4'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Auto', 'wcba'),
+              value: 'auto'
+            }],
+            onChange: val => setAttributes({
+              imageAspectRatio: val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image Hover Effect', 'wcba'),
+            value: imageHoverEffect,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'wcba'),
+              value: 'none'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom', 'wcba'),
+              value: 'zoom'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade', 'wcba'),
+              value: 'fade'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide', 'wcba'),
+              value: 'slide'
+            }],
+            onChange: val => setAttributes({
+              imageHoverEffect: val
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Title', 'wcba'),
+          checked: !!showTitle,
+          onChange: val => setAttributes({
+            showTitle: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Price', 'wcba'),
+          checked: !!showPrice,
+          onChange: val => setAttributes({
+            showPrice: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Rating', 'wcba'),
+          checked: !!showRating,
+          onChange: val => setAttributes({
+            showRating: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Description', 'wcba'),
+          checked: !!showDescription,
+          onChange: val => setAttributes({
+            showDescription: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Sale Badge', 'wcba'),
+          checked: !!showSaleBadge,
+          onChange: val => setAttributes({
+            showSaleBadge: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show New Badge', 'wcba'),
+          checked: !!showNewBadge,
+          onChange: val => setAttributes({
+            showNewBadge: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Add to Cart', 'wcba'),
+          checked: !!showAddToCart,
+          onChange: val => setAttributes({
+            showAddToCart: !!val
+          })
+        }), showAddToCart && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('AJAX Add to Cart', 'wcba'),
+          checked: !!useAjaxCart,
+          onChange: val => setAttributes({
+            useAjaxCart: !!val
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Frontend Filters', 'wcba'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Filters', 'wcba'),
+          checked: !!enableFilters,
+          onChange: val => setAttributes({
+            enableFilters: !!val
+          })
+        }), enableFilters && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Category Filter', 'wcba'),
+            checked: !!filterCategories,
+            onChange: val => setAttributes({
+              filterCategories: !!val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Price Filter', 'wcba'),
+            checked: !!filterPrice,
+            onChange: val => setAttributes({
+              filterPrice: !!val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rating Filter', 'wcba'),
+            checked: !!filterRating,
+            onChange: val => setAttributes({
+              filterRating: !!val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Stock Filter', 'wcba'),
+            checked: !!filterStock,
+            onChange: val => setAttributes({
+              filterStock: !!val
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Sorting', 'wcba'),
+          checked: !!enableSorting,
+          onChange: val => setAttributes({
+            enableSorting: !!val
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Card Styling', 'wcba'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Card Padding (px)', 'wcba'),
+          value: cardPadding,
+          onChange: val => setAttributes({
+            cardPadding: val
+          }),
+          min: 0,
+          max: 50
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius (px)', 'wcba'),
+          value: cardBorderRadius,
+          onChange: val => setAttributes({
+            cardBorderRadius: val
+          }),
+          min: 0,
+          max: 50
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Card Shadow', 'wcba'),
+          checked: !!cardShadow,
+          onChange: val => setAttributes({
+            cardShadow: !!val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover Shadow', 'wcba'),
+          checked: !!cardHoverShadow,
+          onChange: val => setAttributes({
+            cardHoverShadow: !!val
+          })
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      ...blockProps,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+        block: "wcba/product-grid-advanced",
+        attributes: attributes
+      })
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/blocks/product-grid-advanced/editor.scss":
+/*!******************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/editor.scss ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/blocks/product-grid-advanced/index.js":
+/*!***************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/product-grid-advanced/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/product-grid-advanced/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/product-grid-advanced/save.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/product-grid-advanced/style.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/product-grid-advanced/editor.scss");
+
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_1__.name, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/blocks/product-grid-advanced/save.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/save.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Save)
+/* harmony export */ });
+function Save() {
+  return null;
+}
+
+/***/ }),
+
+/***/ "./src/blocks/product-grid-advanced/style.scss":
+/*!*****************************************************!*\
+  !*** ./src/blocks/product-grid-advanced/style.scss ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
+/***/ "@wordpress/server-side-render":
+/*!******************************************!*\
+  !*** external ["wp","serverSideRender"] ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["serverSideRender"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"blocks/product-grid-advanced/index": 0,
+/******/ 			"blocks/product-grid-advanced/style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkwoocommerce_blocks_addon"] = globalThis["webpackChunkwoocommerce_blocks_addon"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["blocks/product-grid-advanced/style-index"], () => (__webpack_require__("./src/blocks/product-grid-advanced/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

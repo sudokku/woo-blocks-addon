@@ -1,1 +1,15 @@
-.wcba-product-grid-advanced{align-items:center;background:#f9f9f9;border:1px dashed #ccc;border-radius:4px;display:flex;justify-content:center;min-height:200px;padding:1rem}.wcba-product-grid-advanced:before{color:#666;content:"Product Grid Advanced";font-size:.875rem;text-align:center}
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/product-grid-advanced/editor.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+.wcba-product-grid-advanced {
+  padding: 1rem;
+  border-radius: 4px;
+  background: #f9f9f9;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=index.css.map*/

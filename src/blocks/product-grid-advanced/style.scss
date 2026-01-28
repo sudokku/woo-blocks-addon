@@ -7,8 +7,9 @@
 		flex-wrap: wrap;
 		gap: 1rem;
 		margin-bottom: 2rem;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
+		flex-direction: column;
 
 		.wcba-grid-sort {
 			select {
@@ -31,6 +32,11 @@
 			flex-wrap: wrap;
 			gap: 1rem;
 			align-items: flex-end;
+
+			p:empty,
+			br {
+				display: none;
+			}
 
 			.wcba-filter-categories,
 			.wcba-filter-price,
@@ -62,6 +68,39 @@
 					input {
 						width: 100px;
 					}
+				}
+			}
+
+			.wcba-filter-categories,
+			.wcba-filter-price,
+			.wcba-filter-rating {
+				select {
+					cursor: pointer;
+					background: #fff;
+
+					&:focus {
+						outline: 2px solid currentColor;
+						outline-offset: 2px;
+					}
+				}
+			}
+
+			.wcba-filter-stock {
+				min-width: auto;
+
+				label {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+					cursor: pointer;
+					white-space: nowrap;
+				}
+
+				input[type="checkbox"] {
+					min-width: auto;
+					width: auto;
+					margin: 0;
+					cursor: pointer;
 				}
 			}
 
